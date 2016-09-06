@@ -1,0 +1,30 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {}
+    },
+    "installed_plugins": {
+        "cordova-plugin-console": {
+            "PACKAGE_NAME": "TimerApp"
+        },
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "TimerApp"
+        },
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "TimerApp"
+        },
+        "cordova-plugin-statusbar": {
+            "PACKAGE_NAME": "TimerApp"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "TimerApp"
+        },
+        "ionic-plugin-keyboard": {
+            "PACKAGE_NAME": "TimerApp"
+        }
+    },
+    "dependent_plugins": {}
+}
