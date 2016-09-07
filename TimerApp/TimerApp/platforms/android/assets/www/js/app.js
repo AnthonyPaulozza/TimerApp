@@ -28,23 +28,29 @@ angular.module('timer', ['ionic'])
 
     this.miliseconds = 0;
     this.running = false;
-    vm.timeout = null;
+    this.timeout = null;
+    this.start = null;
 
     this.onTimeout = function () {
         vm.miliseconds++;
-        vm.timeout = $timeout(vm.onTimeout, 100)
+        var diff = (new Date().getTime() - vm.start) - (vm.miliseconds * 100);
+        
+        vm.timeout = $timeout(vm.onTimeout, 100 - diff)
     }
 
     this.startStop = function () {
         if (vm.running) {
             $timeout.cancel(vm.timeout);
+            vm.timeout = null;
         } else {
+            if (vm.start === null) {
+                vm.start = new Date().getTime();
+            }
             vm.timeout = $timeout(vm.onTimeout, 100);
         }
 
         vm.running = !vm.running;
-    }
-    
+    }    
 })
 
 .filter('formatTimer', function () {
@@ -58,6 +64,6 @@ angular.module('timer', ['ionic'])
         var minutes = Math.floor(seconds / 60);
         var hours = Math.floor(minutes / 60);
 
-        return (z(hours) + ':' + z(minutes) + ':' + z(seconds) + '.' + tenths);
+        return (z(hours) + ':' + z(minutes % 60) + ':' + z(seconds % 60) + '.' + tenths);
     }
 })
