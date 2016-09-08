@@ -26,31 +26,78 @@ angular.module('timer', ['ionic'])
 .controller('stopwatchController', function ($timeout) {
     var vm = this;
 
-    this.miliseconds = 0;
+    this.ticks = 0;
     this.running = false;
     this.timeout = null;
     this.start = null;
 
     this.onTimeout = function () {
-        vm.miliseconds++;
-        var diff = (new Date().getTime() - vm.start) - (vm.miliseconds * 100);
-        
-        vm.timeout = $timeout(vm.onTimeout, 100 - diff)
+        vm.ticks++;
+        var diff = (new Date().getTime() - vm.start) - (vm.ticks * 100);        
+        vm.timeout = $timeout(vm.onTimeout, 100 - diff);
     }
 
     this.startStop = function () {
         if (vm.running) {
             $timeout.cancel(vm.timeout);
             vm.timeout = null;
+            vm.start = null;
         } else {
-            if (vm.start === null) {
-                vm.start = new Date().getTime();
-            }
+            vm.start = new Date().getTime() - (vm.ticks * 100);
             vm.timeout = $timeout(vm.onTimeout, 100);
         }
-
         vm.running = !vm.running;
-    }    
+    }
+
+    this.reset = function () {
+        if (vm.running) {
+            $timeout.cancel(vm.timeout);
+            vm.timeout = null;
+            vm.running = false;
+        }
+        vm.start = null;
+        vm.ticks = 0;
+    }
+})
+
+.controller('timerController', function ($timeout) {
+    var vm = this;
+    
+    this.limit = 5000;
+    this.ticks = 0;
+    this.running = false;
+    this.timeout = null;
+    this.start = null;
+
+    this.onTimeout = function () {
+        vm.ticks++;
+        var diff = (new Date().getTime() - vm.start) - (vm.ticks * 100);
+        vm.timeout = $timeout(vm.onTimeout, 100 - diff);
+    }
+
+    this.startStop = function () {
+        if (vm.running) {
+            $timeout.cancel(vm.timeout);
+            vm.timeout = null;
+            vm.start = null;
+        } else {
+            vm.start = new Date().getTime() - (vm.ticks * 100);
+            vm.timeout = $timeout(vm.onTimeout, 100);
+        }
+        vm.running = !vm.running;
+    }
+
+    this.reset = function () {
+        if (vm.running) {
+            $timeout.cancel(vm.timeout);
+            vm.timeout = null;
+            vm.running = false;
+        }
+        vm.start = null;
+        vm.ticks = 0;
+    }
+
+    
 })
 
 .filter('formatTimer', function () {
