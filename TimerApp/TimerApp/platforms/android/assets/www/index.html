@@ -33,22 +33,13 @@
       </ion-header-bar>
       <ion-content>
         <div ng-controller="stopwatchController as vm">
-            <div>
-                <div class="ng-cloak">{{vm.ticks | formatTimer}}</div>
-                    <round-progress max="59"
-                                    current="vm.getSeconds()"
-                                    color="#45ccce"
-                                    bgcolor="#eaeaea"
-                                    radius="100"
-                                    stroke="20"
-                                    semi="false"
-                                    rounded="false"
-                                    clockwise="false"
-                                    responsive="false"
-                                    duration="80"
-                                    animation="easeInOutQuart"
-                                    animation-delay="0">
-                    </round-progress>
+            <div class="progress-container">
+                <div class="progress-wrapper">
+                    <div class="progress ng-cloak">{{vm.ticks | formatTimer}}</div>
+                        <round-progress max="59" current="vm.getMinutes()" color="#45ccce" bgcolor="#eaeaea" radius="100" stroke="20" semi="false" rounded="false" clockwise="false" responsive="false" duration="80" animation="easeInOutQuart" animation-delay="0">
+                            <round-progress max="59" current="vm.getSeconds()" color="#45ccce" bgcolor="#eaeaea" radius="100" stroke="20" semi="false" rounded="false" clockwise="false" responsive="false" duration="80" animation="easeInOutQuart" animation-delay="0"></round-progress>
+                        </round-progress>
+                    </div>
             </div>
             <button ng-click="vm.startStop()">{{vm.running ? 'Stop' : 'Start'}}</button>
             <button ng-click="vm.reset()">Reset</button>

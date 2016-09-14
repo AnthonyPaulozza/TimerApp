@@ -69,8 +69,8 @@ angular.module('timer', ['ionic', 'angular-svg-round-progressbar'])
     }
 
     this.getSeconds = function () {
-        return Math.floor(vm.ticks / 10);
-    }
+        return Math.floor(vm.ticks / 10) % 60;
+    }    
 })
 
 .controller('timerController', function ($timeout) {
