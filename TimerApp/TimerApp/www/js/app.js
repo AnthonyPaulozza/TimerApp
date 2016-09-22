@@ -65,7 +65,7 @@ angular.module('timer', ['ionic', 'angular-svg-round-progressbar'])
     }
 
     this.getMinutes = function () {
-        return Math.floor(vm.ticks / 10 / 60);
+        return Math.floor(vm.ticks / 10 / 60) % 60;
     }
 
     this.getSeconds = function () {
@@ -124,6 +124,6 @@ angular.module('timer', ['ionic', 'angular-svg-round-progressbar'])
         var minutes = Math.floor(seconds / 60);
         var hours = Math.floor(minutes / 60);
 
-        return (z(hours) + ':' + z(minutes % 60) + ':' + z(seconds % 60) + '.' + tenths);
+        return (z(hours) + ':' + z(minutes % 60) + ':' + z(seconds % 60));
     }
 })
