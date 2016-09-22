@@ -31,67 +31,67 @@
       <ion-header-bar class="bar-dark">
         <h1 class="title">Timer</h1>
       </ion-header-bar>
-      <ion-content>
-        <div ng-controller="stopwatchController as vm">
-            <div class="progress-container">
-                <div class="progress-wrapper">
-                    <div class="progress ng-cloak">{{vm.ticks | formatTimer}}</div>
-                        <round-progress max="max"
-                        current="vm.getHours()"
-                        color="45ccce"
-                        bgcolor="transparent"
-                        radius="125"
-                        stroke="15"
-                        semi="false"
-                        rounded="false"
-                        clockwise="true"
-                        responsive="false"
-                        animation="easeOutCubic">
-                            <round-progress max="59"
-                            current="vm.getMinutes()"
-                            color="#0971B2"
-                            bgcolor="transparent"
-                            radius="125"
-                            stroke="15"
-                            semi="false"
-                            rounded="false" 
-                            clockwise="true" 
-                            responsive="false"                                            
-                            animation="easeOutCubic"
-                            offset="inherit">
-                                <round-progress max="59"
-                                current="vm.getSeconds()"
-                                color="#1485CC"
-                                bgcolor="transparent"
-                                radius="125"
-                                semi="false"
-                                rounded="false"
-                                clockwise="true"
-                                responsive="false"
-                                stroke="15"
-                                animation="easeOutCubic"
-                                offset="inherit">                                
-                             </round-progress>
-                        </round-progress>
-                    </round-progress>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <button class="button" ng-click="vm.startStop()">{{vm.running ? 'Stop' : 'Start'}}</button>                    
-                </div>
-                <div class="col">
-                    <button class="button" ng-click="vm.reset()">Reset</button>
-                </div>
-            </div>            
-          </div>
-          <div ng-controller="timerController as vm">
-              {{(vm.limit - vm.ticks) | formatTimer}}
-              <button ng-click="vm.startStop()">{{vm.running ? 'Stop' : 'Start'}}</button>
-              <button ng-click="vm.reset()">Reset</button>
-          </div>
+          <ion-tabs class="tabs-positive tabs-icon-top">
+              <ion-tab title="Home" icon-on="ion-ios-filing" icon-off="ion-ios-filing-outline">
+                  <div ng-controller="stopwatchController as vm">
+                      <div class="progress-container">
+                          <div class="progress-wrapper">
+                              <div class="progress ng-cloak">{{vm.ticks | formatTimer}}</div>
+                              <round-progress max="max"
+                                              current="vm.getHours()"
+                                              color="45ccce"
+                                              bgcolor="transparent"
+                                              radius="125"
+                                              stroke="10"
+                                              semi="false"
+                                              rounded="false"
+                                              clockwise="true"
+                                              responsive="false"
+                                              animation="easeOutCubic">
+                                  <round-progress max="59"
+                                                  current="vm.getMinutes()"
+                                                  color="#0971B2"
+                                                  bgcolor="transparent"
+                                                  radius="125"
+                                                  stroke="10"
+                                                  semi="false"
+                                                  rounded="false"
+                                                  clockwise="true"
+                                                  responsive="false"
+                                                  animation="easeOutCubic"
+                                                  offset="inherit">
+                                      <round-progress max="59"
+                                                      current="vm.getSeconds()"
+                                                      color="#1485CC"
+                                                      bgcolor="transparent"
+                                                      radius="125"
+                                                      semi="false"
+                                                      rounded="false"
+                                                      clockwise="true"
+                                                      responsive="false"
+                                                      stroke="10"
+                                                      animation="easeOutCubic"
+                                                      offset="inherit">
+                                      </round-progress>
+                                  </round-progress>
+                              </round-progress>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col">
+                              <button class="button" ng-click="vm.startStop()">{{vm.running ? 'Stop' : 'Start'}}</button>
+                          </div>
+                          <div class="col">
+                              <button class="button" ng-click="vm.reset()">Reset</button>
+                          </div>
+                      </div>
+                  </div>
+              </ion-tab>
 
-      </ion-content>
+              <ion-tab title="About" icon-on="ion-ios-clock" icon-off="ion-ios-clock-outline">
+                  Goodbye
+              </ion-tab>
+          </ion-tabs>
     </ion-pane>
   </body>
 </html>

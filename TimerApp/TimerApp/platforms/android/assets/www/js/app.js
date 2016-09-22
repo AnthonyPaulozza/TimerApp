@@ -23,6 +23,10 @@ angular.module('timer', ['ionic', 'angular-svg-round-progressbar'])
   });
 })
 
+.config(function ($ionicConfigProvider) {
+    $ionicConfigProvider.tabs.position('bottom');
+})
+
 .controller('stopwatchController', function ($timeout) {
     var vm = this;
 
