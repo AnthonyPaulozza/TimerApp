@@ -79,7 +79,7 @@ angular.module('timer', ['ionic', 'angular-svg-round-progressbar'])
 
 .controller('timerController', function ($timeout) {
     var vm = this;
-    
+
     this.limit = 5000;
     this.ticks = 0;
     this.running = false;
@@ -88,6 +88,7 @@ angular.module('timer', ['ionic', 'angular-svg-round-progressbar'])
 
     this.onTimeout = function () {
         vm.ticks++;
+        if(vm.ticks < vm.limit)
         var diff = (new Date().getTime() - vm.start) - (vm.ticks * 100);
         vm.timeout = $timeout(vm.onTimeout, 100 - diff);
     }
@@ -112,6 +113,18 @@ angular.module('timer', ['ionic', 'angular-svg-round-progressbar'])
         }
         vm.start = null;
         vm.ticks = 0;
+    }
+
+    this.getHours = function () {
+        return Math.floor(vm.limit - vm.ticks / 10 / 60 / 60);
+    }
+
+    this.getMinutes = function () {
+        return Math.floor(vm.limit - vm.ticks / 10 / 60) % 60;
+    }
+
+    this.getSeconds = function () {
+        return Math.floor(vm.limit - vm.ticks / 10) % 60;
     }
 
     
