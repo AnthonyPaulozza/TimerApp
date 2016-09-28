@@ -1,0 +1,31 @@
+﻿<div class="NumberPickerDiv">
+  <div class="row">
+    <span class="button-small col col-25">Hours
+      <button type="button" class="button button-clear button-small button-dark numberPickerArrows marginBottom10" ng-click="increaseHours()">
+        <i class="icon ion-chevron-up"></i>
+      </button>
+      <div ng-bind="hours" class="ipBoxes numberPickerBoxText"></div>
+      <button type="button" class="button button-clear button-small button-dark numberPickerArrows marginTop10" ng-click="decreaseHours()">
+        <i class="icon ion-chevron-down"></i>
+      </button>
+    </span>
+    <span class="button-small col col-25">Minutes
+        <button type="button" class="button button-clear button-small button-dark numberPickerArrows marginBottom10" ng-click="increaseMinutes()">
+              <i class="icon ion-chevron-up"></i>
+        </button>
+        <div ng-bind="minutes" class="ipBoxes numberPickerBoxText"></div>
+        <button type="button" class="button button-clear button-small button-dark numberPickerArrows marginTop10" ng-click="decreaseMinutes()">
+            <i class="icon ion-chevron-down"></i>
+        </button>
+    </span>
+    <span class="button-small col col-25">Seconds
+        <button type="button" class="button button-clear button-small button-dark numberPickerArrows marginBottom10" ng-click="increaseSeconds()">
+            <i class="icon ion-chevron-up"></i>
+        </button>
+        <div ng-bind="seconds" class="ipBoxes numberPickerBoxText"></div>
+        <button type="button" class="button button-clear button-small button-dark numberPickerArrows marginTop10" ng-click="decreaseSeconds()">
+            <i class="icon ion-chevron-down"></i>
+        </button>
+    </span>
+  </div>
+</div>

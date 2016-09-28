@@ -77,20 +77,26 @@ angular.module('timer', ['ionic', 'angular-svg-round-progressbar'])
     }    
 })
 
-.controller('timerController', function ($timeout) {
+.controller('timerController', function ($timeout, $ionicPopup, $scope) {
     var vm = this;
 
-    this.limit = 5000;
+    this.limit = 3000;
     this.ticks = 0;
     this.running = false;
     this.timeout = null;
     this.start = null;
 
+    $scope.hours = 0;
+    $scope.minutes = 5;
+    $scope.seconds = 0;
+
     this.onTimeout = function () {
         vm.ticks++;
-        if(vm.ticks < vm.limit)
-        var diff = (new Date().getTime() - vm.start) - (vm.ticks * 100);
-        vm.timeout = $timeout(vm.onTimeout, 100 - diff);
+        if (vm.ticks < vm.limit) {
+            var diff = (new Date().getTime() - vm.start) - (vm.ticks * 100);
+            vm.timeout = $timeout(vm.onTimeout, 100 - diff);
+        }
+        
     }
 
     this.startStop = function () {
@@ -116,18 +122,94 @@ angular.module('timer', ['ionic', 'angular-svg-round-progressbar'])
     }
 
     this.getHours = function () {
-        return Math.floor(vm.limit - vm.ticks / 10 / 60 / 60);
+        return Math.floor((vm.limit - vm.ticks) / 10 / 60 / 60);
     }
 
     this.getMinutes = function () {
-        return Math.floor(vm.limit - vm.ticks / 10 / 60) % 60;
+        return Math.floor((vm.limit - vm.ticks) / 10 / 60) % 60;
     }
 
     this.getSeconds = function () {
-        return Math.floor(vm.limit - vm.ticks / 10) % 60;
+        return Math.floor((vm.limit - vm.ticks) / 10) % 60;
+    }
+
+    $scope.increaseHours = function () {
+        $scope.hours++;
+    }
+
+    $scope.decreaseHours = function () {
+        if ($scope.hours > 0) {
+            $scope.hours--;
+        }
+    }
+
+    $scope.increaseMinutes = function () {
+        if ($scope.minutes < 59) {
+            $scope.minutes++;
+        } else {
+            $scope.minutes = 0;
+        }
+    }
+
+    $scope.decreaseMinutes = function () {
+        if ($scope.minutes > 0) {
+            $scope.minutes--;
+        } else {
+            $scope.minutes = 59;
+        }
+    }
+
+    $scope.increaseSeconds = function () {
+        if ($scope.seconds < 59) {
+            $scope.seconds++;
+        } else {
+            $scope.seconds = 0;
+        }
+    }
+
+    $scope.decreaseSeconds = function () {
+        if ($scope.seconds > 0) {
+            $scope.seconds--;
+        } else {
+            $scope.seconds = 59;
+        }
+    }
+
+    this.showTimePickerPopup = function () {
+        if (vm.running) {
+            vm.startStop();
+        }
+        $ionicPopup.show({
+            templateUrl: 'number-picker.html',
+            scope: $scope,
+            title: 'Set Timer',
+            buttons: [
+                {
+                    text: 'Cancel',
+                    type: 'button-stable'
+                },
+                {
+                    text: 'Set',
+                    type: 'button-positive',
+                    onTap: function (e) {
+                        vm.limit = $scope.hours * 36000 + $scope.minutes * 600 + $scope.seconds * 10;
+                        vm.reset();
+                        return true;
+                    }
+                }
+            ]
+        })
     }
 
     
+})
+
+.controller('numberPickerController', function ($ionicPopup) {
+    var vm = this;
+
+    
+
+   
 })
 
 .filter('formatTimer', function () {
