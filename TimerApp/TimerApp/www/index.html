@@ -28,12 +28,9 @@
   </head>
   <body ng-app="timer">
     <ion-pane>
-      <ion-header-bar class="bar-dark">
-        <h1 class="title">Timer</h1>
-      </ion-header-bar>
           <ion-tabs class="tabs-striped tabs-color-positive">
               <ion-tab icon="icon ion-android-stopwatch">
-                  <div ng-controller="stopwatchController as vm">
+                  <div ng-controller="stopwatchController as vm" style="position:relative">
                       <div class="progress-container">
                           <div class="progress-wrapper">
                               <div class="progress ng-cloak">{{vm.ticks | formatTimer}}</div>
@@ -77,12 +74,23 @@
                               </round-progress>
                           </div>
                       </div>
-                      <div class="row">
+                      <div class="lap-area">
+                          <div class="lap-area-scroll">
+                              <div class="lap" ng-repeat="lap in vm.laps">
+                                  {{lap.number}}: {{lap.time| formatTimer}}
+                              </div>
+                          </div>
+                      </div>
+                      
+                      <div class="row button-bar" style="">
                           <div class="col">
                               <button class="button" ng-click="vm.startStop()">{{vm.running ? 'Stop' : 'Start'}}</button>
                           </div>
                           <div class="col">
                               <button class="button" ng-click="vm.reset()">Reset</button>
+                          </div>
+                          <div class="col">
+                              <button class="button" ng-click="vm.lap()">Lap</button>
                           </div>
                       </div>
                   </div>

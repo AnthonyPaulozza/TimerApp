@@ -24,7 +24,7 @@ angular.module('timer', ['ionic', 'angular-svg-round-progressbar'])
 })
 
 .config(function ($ionicConfigProvider) {
-    $ionicConfigProvider.tabs.position('bottom');
+    //$ionicConfigProvider.tabs.position('bottom');
 })
 
 .controller('stopwatchController', function ($timeout) {
@@ -34,6 +34,8 @@ angular.module('timer', ['ionic', 'angular-svg-round-progressbar'])
     this.running = false;
     this.timeout = null;
     this.start = null;
+
+    this.laps = [];
 
     this.onTimeout = function () {
         vm.ticks++;
@@ -62,6 +64,13 @@ angular.module('timer', ['ionic', 'angular-svg-round-progressbar'])
         }
         vm.start = null;
         vm.ticks = 0;
+    }
+
+    this.lap = function () {
+        vm.laps.push({
+            number: vm.laps.length,
+            time: vm.ticks
+        });
     }
 
     this.getHours = function () {        
